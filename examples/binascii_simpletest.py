@@ -7,10 +7,11 @@ print("Original Binary Data: ", data)
 
 # Get the hexadecimal representation of the binary data
 hex_data = hexlify(data)
-# Verify data
 print("Hex Data: ", hex_data)
-assert hex_data == b"43697263756974507974686f6e20697320417765736f6d6521", "hexlified data does not match expected data."
-
+# Verify data
+assert (
+    hex_data == b"43697263756974507974686f6e20697320417765736f6d6521",
+), "hexlified data does not match expected data."
 # Get the binary data represented by hex_data
 bin_data = unhexlify(hex_data)
 print("Binary Data: ", bin_data)
@@ -29,5 +30,3 @@ assert b64_ascii_data == b"Qmxpbmth\n", "Expected base64 coding does not match."
 bin_data = a2b_base64(b"Qmxpbmth\n")
 print("Converted b64 ASCII->Binary Data: ", bin_data)
 assert bin_data == data, "Expected binary data does not match."
-
-print("All checks OK!")
