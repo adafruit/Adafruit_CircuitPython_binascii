@@ -48,35 +48,43 @@ except ImportError:
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_binascii.git"
 
-# pylint: disable=bad-whitespace
+
 TABLE_A2B_B64 = [
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, 62, -1, -1, -1, 63,
-    52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1,  -1, -1,  -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
+    52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1,
     -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,-1,  -1,  -1,  -1, -1,
-    -1,  26, 27, 28, 29, 30,31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,-1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1,  -1, -1, -1, -1,  -1, -1, -1, -1, -1, -1, -1, -1,
+    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,
+    -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 ]
 
+TABLE_B2A_B64 = (
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
+
+class Error(Exception):
+    """Exception raised on errors. These are usually programming errors."""
+    # pylint: disable=unnecessary-pass
+    pass
 
 if not "unhexlify" in globals():
     # pylint: disable=function-redefined
     def unhexlify(hexstr):
         """Return the binary data represented by hexstr.
         :param str hexstr: Hexadecimal string.
+
         """
         if len(hexstr) % 2 != 0:
-            raise ValueError("Odd-length string")
+            raise Error("Odd-length string")
 
         return bytes([int(hexstr[i : i + 2], 16) for i in range(0, len(hexstr), 2)])
 
@@ -91,6 +99,7 @@ if not "hexlify" in globals():
         as long as the length of data.
 
         :param bytes data: Binary data, as bytes.
+
         """
         if not data:
             raise TypeError("Data provided is zero-length")
@@ -108,7 +117,11 @@ TABLE_A2B_B64 = ''.join(map(_transform, TABLE_A2B_B64))
 assert len(TABLE_A2B_B64) == 256
 
 def a2b_base64(b64_data):
-    "Decode a line of base64 data."
+    """Convert a block of base64 data back to binary and return the binary data.
+
+    :param str b64_data: Base64 data.
+
+    """
     res = []
     quad_pos = 0
     leftchar = 0
@@ -144,14 +157,12 @@ def a2b_base64(b64_data):
 
     return b''.join(res)
 
-# ____________________________________________________________
-
-TABLE_B2A_B64 = (
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
-
 def b2a_base64(bin_data):
-    "Base64-code line of data."
+    """Convert binary data to a line of ASCII characters in base64 coding.
 
+    :param str bin_data: Binary data string, as bytes
+
+    """
     newlength = (len(bin_data) + 2) // 3
     newlength = newlength * 4 + 1
     res = []
