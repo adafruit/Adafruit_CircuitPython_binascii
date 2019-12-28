@@ -9,8 +9,8 @@ Introduction
     :target: https://discord.gg/nBQh6qu
     :alt: Discord
 
-.. image:: https://travis-ci.com/adafruit/Adafruit_CircuitPython_binascii.svg?branch=master
-    :target: https://travis-ci.com/adafruit/Adafruit_CircuitPython_binascii
+.. image:: https://github.com/adafruit/Adafruit_CircuitPython_binascii/workflows/Build%20CI/badge.svg
+    :target: https://github.com/adafruit/Adafruit_CircuitPython_binascii/actions/
     :alt: Build Status
 
 The binascii module contains a number of methods to convert between binary and various ASCII-encoded binary representations.
