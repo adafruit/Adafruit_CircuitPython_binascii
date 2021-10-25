@@ -68,6 +68,11 @@ Hex <-> Binary Conversions
         bin_data = unhexlify(hex_data)
         print("Binary Data: ", bin_data)
 
+Documentation
+=============
+
+API documentation for this library can be found on `Read the Docs <https://circuitpython.readthedocs.io/projects/binascii/en/latest/>`_.
+
 Contributing
 ============
 
