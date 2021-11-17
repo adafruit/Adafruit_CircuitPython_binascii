@@ -63,7 +63,7 @@ class Error(Exception):
 
 if not "unhexlify" in globals():
     # pylint: disable=function-redefined
-    def unhexlify(hexstr):
+    def unhexlify(hexstr: str) -> bytes:
         """Return the binary data represented by hexstr.
         :param str hexstr: Hexadecimal string.
 
@@ -76,7 +76,7 @@ if not "unhexlify" in globals():
 
 if not "hexlify" in globals():
     # pylint: disable=function-redefined
-    def hexlify(data):
+    def hexlify(data: bytes) -> bytes:
         """Return the hexadecimal representation of the
         binary data. Every byte of data is converted into
         the corresponding 2-digit hex representation.
@@ -96,7 +96,7 @@ B2A_HEX = hexlify
 A2B_HEX = unhexlify
 
 
-def _transform(n):
+def _transform(n: int) -> str:
     if n == -1:
         return "\xff"
     return chr(n)
@@ -106,7 +106,7 @@ TABLE_A2B_B64 = "".join(map(_transform, TABLE_A2B_B64))
 assert len(TABLE_A2B_B64) == 256
 
 
-def a2b_base64(b64_data):
+def a2b_base64(b64_data: str) -> bytes:
     """Convert a block of base64 data back to binary and return the binary data.
 
     :param str b64_data: Base64 data.
@@ -148,7 +148,7 @@ def a2b_base64(b64_data):
     return b"".join(res)
 
 
-def b2a_base64(bin_data):
+def b2a_base64(bin_data: str) -> bytes:
     """Convert binary data to a line of ASCII characters in base64 coding.
 
     :param str bin_data: Binary data string, as bytes
