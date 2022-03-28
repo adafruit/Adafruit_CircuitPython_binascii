@@ -106,10 +106,10 @@ TABLE_A2B_B64 = "".join(map(_transform, TABLE_A2B_B64))
 assert len(TABLE_A2B_B64) == 256
 
 
-def a2b_base64(b64_data: str) -> bytes:
+def a2b_base64(b64_data: bytes) -> bytes:
     """Convert a block of base64 data back to binary and return the binary data.
 
-    :param str b64_data: Base64 data.
+    :param bytes b64_data: Base64 data.
 
     """
     res = []
@@ -148,10 +148,10 @@ def a2b_base64(b64_data: str) -> bytes:
     return b"".join(res)
 
 
-def b2a_base64(bin_data: str) -> bytes:
+def b2a_base64(bin_data: bytes) -> bytes:
     """Convert binary data to a line of ASCII characters in base64 coding.
 
-    :param str bin_data: Binary data string, as bytes
+    :param bytes bin_data: Binary data string, as bytes
 
     """
     newlength = (len(bin_data) + 2) // 3
