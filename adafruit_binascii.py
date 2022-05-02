@@ -23,6 +23,8 @@ Implementation Notes
 
 """
 try:
+    from typing import Union
+    from circuitpython_typing import ReadableBuffer
     from binascii import hexlify, unhexlify
 except ImportError:
     pass
@@ -63,11 +65,12 @@ class Error(Exception):
 
 if not "unhexlify" in globals():
     # pylint: disable=function-redefined
-    def unhexlify(hexstr: str) -> bytes:
+    def unhexlify(hexstr: Union[str, ReadableBuffer]) -> bytes:
         """Return the binary data represented by hexstr.
-        :param str hexstr: Hexadecimal string.
 
+        :param str|ReadableBuffer hexstr: Hexadecimal string.
         """
+
         if len(hexstr) % 2 != 0:
             raise Error("Odd-length string")
 
@@ -76,7 +79,7 @@ if not "unhexlify" in globals():
 
 if not "hexlify" in globals():
     # pylint: disable=function-redefined
-    def hexlify(data: bytes) -> bytes:
+    def hexlify(data: ReadableBuffer) -> bytes:
         """Return the hexadecimal representation of the
         binary data. Every byte of data is converted into
         the corresponding 2-digit hex representation.
@@ -84,10 +87,10 @@ if not "hexlify" in globals():
         as long as the length of data.
 
         :param bytes data: Binary data, as bytes.
-
         """
         if not data:
             raise TypeError("Data provided is zero-length")
+
         data = "".join("%02x" % i for i in data)
         return bytes(data, "utf-8")
 
@@ -106,12 +109,12 @@ TABLE_A2B_B64 = "".join(map(_transform, TABLE_A2B_B64))
 assert len(TABLE_A2B_B64) == 256
 
 
-def a2b_base64(b64_data: bytes) -> bytes:
+def a2b_base64(b64_data: ReadableBuffer) -> bytes:
     """Convert a block of base64 data back to binary and return the binary data.
 
     :param bytes b64_data: Base64 data.
-
     """
+
     res = []
     quad_pos = 0
     leftchar = 0
@@ -148,12 +151,12 @@ def a2b_base64(b64_data: bytes) -> bytes:
     return b"".join(res)
 
 
-def b2a_base64(bin_data: bytes) -> bytes:
+def b2a_base64(bin_data: ReadableBuffer) -> bytes:
     """Convert binary data to a line of ASCII characters in base64 coding.
 
-    :param bytes bin_data: Binary data string, as bytes
-
+    :param ReadableBuffer bin_data: Binary data string, as bytes
     """
+
     newlength = (len(bin_data) + 2) // 3
     newlength = newlength * 4 + 1
     res = []
