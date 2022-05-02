@@ -67,7 +67,7 @@ if not "unhexlify" in globals():
     # pylint: disable=function-redefined
     def unhexlify(hexstr: Union[str, ReadableBuffer]) -> bytes:
         """Return the binary data represented by hexstr.
-        
+
         :param str|ReadableBuffer hexstr: Hexadecimal string.
         """
 
