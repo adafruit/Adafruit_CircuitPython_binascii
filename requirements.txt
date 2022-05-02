@@ -2,4 +2,4 @@
 #
 # SPDX-License-Identifier: Unlicense
 
-Adafruit-Blinka>=7.0.0
+Adafruit-Blinka>=7.2.3
