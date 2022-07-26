@@ -1,7 +1,7 @@
 Introduction
 ============
 
-.. image:: https://readthedocs.org/projects/adafruit-circuitpython-binascii/badge/?version=latest
+.. image:: https://readthedocs.org/projects/binascii/badge/?version=latest
     :target: https://docs.circuitpython.org/projects/binascii/en/latest/
     :alt: Documentation Status
 
