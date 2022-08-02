@@ -13,6 +13,10 @@ Introduction
     :target: https://github.com/adafruit/Adafruit_CircuitPython_binascii/actions/
     :alt: Build Status
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+    :alt: Code Style: Black
+
 The binascii module contains a number of methods to convert between binary and various ASCII-encoded binary representations.
 
 Dependencies
