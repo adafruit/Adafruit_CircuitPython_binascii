@@ -146,7 +146,7 @@ def a2b_base64(b64_data: ReadableBuffer) -> bytes:
             last_char_was_a_pad = False
     else:
         if leftbits != 0:
-            raise Exception("Incorrect padding")
+            raise ValueError("Incorrect padding")
 
     return b"".join(res)
 
