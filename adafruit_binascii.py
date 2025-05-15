@@ -22,10 +22,12 @@ Implementation Notes
   https://github.com/adafruit/circuitpython/releases
 
 """
+
 try:
-    from typing import Union
-    from circuitpython_typing import ReadableBuffer
     from binascii import hexlify, unhexlify
+    from typing import Union
+
+    from circuitpython_typing import ReadableBuffer
 except ImportError:
     pass
 
@@ -59,12 +61,11 @@ TABLE_B2A_B64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+
 class Error(Exception):
     """Exception raised on errors. These are usually programming errors."""
 
-    # pylint: disable=unnecessary-pass
     pass
 
 
 if not "unhexlify" in globals():
-    # pylint: disable=function-redefined
+
     def unhexlify(hexstr: Union[str, ReadableBuffer]) -> bytes:
         """Return the binary data represented by hexstr.
 
@@ -78,7 +79,7 @@ if not "unhexlify" in globals():
 
 
 if not "hexlify" in globals():
-    # pylint: disable=function-redefined
+
     def hexlify(data: ReadableBuffer) -> bytes:
         """Return the hexadecimal representation of the
         binary data. Every byte of data is converted into
@@ -122,7 +123,7 @@ def a2b_base64(b64_data: ReadableBuffer) -> bytes:
     last_char_was_a_pad = False
 
     for char in b64_data:
-        char = chr(char)
+        char = chr(char)  # noqa: PLW2901
         if char == "=":
             if quad_pos > 2 or (quad_pos == 2 and last_char_was_a_pad):
                 break  # stop on 'xxx=' or on 'xx=='
@@ -137,12 +138,10 @@ def a2b_base64(b64_data: ReadableBuffer) -> bytes:
             quad_pos = (quad_pos + 1) & 3
             leftchar = (leftchar << 6) | n
             leftbits += 6
-            #
             if leftbits >= 8:
                 leftbits -= 8
                 res.append((leftchar >> leftbits).to_bytes(1, "big"))
                 leftchar &= (1 << leftbits) - 1
-            #
             last_char_was_a_pad = False
     else:
         if leftbits != 0:
@@ -172,7 +171,6 @@ def b2a_base64(bin_data: ReadableBuffer) -> bytes:
         if leftbits >= 6:
             res.append(TABLE_B2A_B64[(leftchar >> (leftbits - 6)) & 0x3F])
             leftbits -= 6
-    #
     if leftbits == 2:
         res.append(TABLE_B2A_B64[(leftchar & 3) << 4])
         res.append("=")
