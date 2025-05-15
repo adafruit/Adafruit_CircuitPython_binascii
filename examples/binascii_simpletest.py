@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2020 ladyada for Adafruit Industries
 # SPDX-License-Identifier: MIT
 
-from adafruit_binascii import hexlify, unhexlify, a2b_base64, b2a_base64
+from adafruit_binascii import a2b_base64, b2a_base64, hexlify, unhexlify
 
 print("-- Binary<->Hex Conversions --")
 # Binary data.
