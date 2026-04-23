@@ -92,7 +92,7 @@ if not "hexlify" in globals():
         if not data:
             raise TypeError("Data provided is zero-length")
 
-        data = "".join("%02x" % i for i in data)
+        data = "".join(f"{i:02x}" for i in data)
         return bytes(data, "utf-8")
 
 
